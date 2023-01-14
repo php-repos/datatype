@@ -2,9 +2,10 @@
 
 namespace Tests\Map\FirstKeyTest;
 
-use Saeghe\Datatype\Map;
-use Saeghe\Datatype\Pair;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Map;
+use PhpRepos\Datatype\Pair;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should return first key that pass the given condition',

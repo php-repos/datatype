@@ -2,8 +2,9 @@
 
 namespace Tests\Str\LastCharacterTest;
 
-use Saeghe\Datatype\Str;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Str;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should return last character',

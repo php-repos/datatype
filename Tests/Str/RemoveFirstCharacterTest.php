@@ -2,8 +2,9 @@
 
 namespace Tests\Str\RemoveFirstCharacterTest;
 
-use Saeghe\Datatype\Str;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Str;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should remove first character',

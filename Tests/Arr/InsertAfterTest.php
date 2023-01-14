@@ -2,8 +2,9 @@
 
 namespace Tests\Arr\InsertAfterTest;
 
-use function Saeghe\Datatype\Arr\insert_after;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\Datatype\Arr\insert_after;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should put given value after given key in array',

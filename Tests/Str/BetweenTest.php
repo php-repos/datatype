@@ -2,8 +2,9 @@
 
 namespace Tests\Str\BetweenTest;
 
-use function Saeghe\Datatype\Str\between;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\Datatype\Str\between;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it returns substring in the given subject between the given start and the given end substrings',

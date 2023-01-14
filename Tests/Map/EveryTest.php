@@ -2,10 +2,11 @@
 
 namespace Tests\Map\EveryTest;
 
-use Saeghe\Datatype\Map;
-use Saeghe\Datatype\Pair;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_false;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Map;
+use PhpRepos\Datatype\Pair;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_false;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it returns true when the map is empty',

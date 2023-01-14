@@ -2,9 +2,10 @@
 
 namespace Tests\Arr\FirstTest;
 
-use function Saeghe\Datatype\Arr\first;
-use function Saeghe\Datatype\Str\first_character;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\Datatype\Arr\first;
+use function PhpRepos\Datatype\Str\first_character;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should first item of the array',

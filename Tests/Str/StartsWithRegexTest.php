@@ -2,9 +2,10 @@
 
 namespace Tests\Str\StartsWithRegexTest;
 
-use function Saeghe\Datatype\Str\starts_with_regex;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_false;
+use function PhpRepos\Datatype\Str\starts_with_regex;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_false;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should check if string starts with given regex',

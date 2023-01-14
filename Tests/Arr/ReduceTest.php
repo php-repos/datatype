@@ -2,8 +2,9 @@
 
 namespace Tests\Arr\ReduceTest;
 
-use function Saeghe\Datatype\Arr\reduce;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\Datatype\Arr\reduce;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should return the carry when given array is empty',

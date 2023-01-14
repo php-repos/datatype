@@ -2,8 +2,9 @@
 
 namespace Tests\Pair\ValueTest;
 
-use Saeghe\Datatype\Pair;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Pair;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should new pair by setting the given value as value for the pair',

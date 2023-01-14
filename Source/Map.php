@@ -1,6 +1,6 @@
 <?php
 
-namespace Saeghe\Datatype;
+namespace PhpRepos\Datatype;
 
 use ArrayAccess;
 use ArrayIterator;
@@ -8,15 +8,15 @@ use Closure;
 use Countable;
 use IteratorAggregate;
 use Traversable;
-use function Saeghe\Datatype\Arr\every;
-use function Saeghe\Datatype\Arr\first;
-use function Saeghe\Datatype\Arr\first_key;
-use function Saeghe\Datatype\Arr\forget;
-use function Saeghe\Datatype\Arr\has;
-use function Saeghe\Datatype\Arr\last;
-use function Saeghe\Datatype\Arr\map;
-use function Saeghe\Datatype\Arr\reduce;
-use function Saeghe\Datatype\Arr\take;
+use function PhpRepos\Datatype\Arr\every;
+use function PhpRepos\Datatype\Arr\first;
+use function PhpRepos\Datatype\Arr\first_key;
+use function PhpRepos\Datatype\Arr\forget;
+use function PhpRepos\Datatype\Arr\has;
+use function PhpRepos\Datatype\Arr\last;
+use function PhpRepos\Datatype\Arr\map;
+use function PhpRepos\Datatype\Arr\reduce;
+use function PhpRepos\Datatype\Arr\take;
 
 class Map implements ArrayAccess, IteratorAggregate, Countable
 {

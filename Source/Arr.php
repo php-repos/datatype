@@ -1,6 +1,6 @@
 <?php
 
-namespace Saeghe\Datatype\Arr;
+namespace PhpRepos\Datatype\Arr;
 
 use Closure;
 

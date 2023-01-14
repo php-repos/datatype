@@ -2,8 +2,9 @@
 
 namespace Tests\Text\SetTest;
 
-use Saeghe\Datatype\Text;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Text;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should set given text',

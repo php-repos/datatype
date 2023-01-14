@@ -4,15 +4,16 @@ namespace Tests\Collection\CollectionTest;
 
 use ArrayAccess;
 use Countable;
-use Saeghe\Datatype\Collection;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Collection;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it can construct a collection without initial data',
     case: function () {
         $collection = new Collection();
 
-        assert_true($collection instanceof \ArrayAccess);
+        assert_true($collection instanceof ArrayAccess);
         assert_true([] === $collection->items());
     }
 );
@@ -31,7 +32,7 @@ test(
     case: function () {
         $collection = new Collection(['foo', 'bar', 'baz', 'qux']);
 
-        assert_true($collection instanceof \Countable);
+        assert_true($collection instanceof Countable);
         assert_true(4 === count($collection));
     }
 );

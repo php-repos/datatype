@@ -2,9 +2,10 @@
 
 namespace Tests\Tree\TreeTest;
 
-use Saeghe\Datatype\Collection;
-use Saeghe\Datatype\Tree;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Collection;
+use PhpRepos\Datatype\Tree;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should make a tree',

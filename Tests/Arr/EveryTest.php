@@ -2,9 +2,10 @@
 
 namespace Tests\Arr\EveryTest;
 
-use function Saeghe\Datatype\Arr\every;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_false;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\Datatype\Arr\every;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_false;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it return true when every item has value',

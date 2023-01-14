@@ -2,9 +2,10 @@
 
 namespace Tests\Text\TextTest;
 
-use Saeghe\Datatype\Text;
+use PhpRepos\Datatype\Text;
 use Stringable;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it can construct a text without initial data',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Saeghe\Datatype\Str;
+namespace PhpRepos\Datatype\Str;
 
 function after_first_occurrence(string $subject, string $needle): string
 {

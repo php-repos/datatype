@@ -2,8 +2,9 @@
 
 namespace Tests\Arr\LastKeyTest;
 
-use function Saeghe\Datatype\Arr\last_key;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\Datatype\Arr\last_key;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should last key item of the array',

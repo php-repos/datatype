@@ -2,8 +2,9 @@
 
 namespace Tests\Arr\TakeTest;
 
-use function Saeghe\Datatype\Arr\take;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\Datatype\Arr\take;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should return first value where condition passes and unset item from the main items',

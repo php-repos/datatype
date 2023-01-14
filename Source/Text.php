@@ -1,6 +1,6 @@
 <?php
 
-namespace Saeghe\Datatype;
+namespace PhpRepos\Datatype;
 
 use Stringable;
 

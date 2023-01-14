@@ -2,9 +2,10 @@
 
 namespace Tests\Collection\ExceptTest;
 
-use Saeghe\Datatype\Map;
-use Saeghe\Datatype\Pair;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Map;
+use PhpRepos\Datatype\Pair;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should return a new map of items, except items by given closure on a map',

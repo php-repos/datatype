@@ -2,8 +2,9 @@
 
 namespace Tests\Collection\PushTest;
 
-use Saeghe\Datatype\Collection;
-use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
+use PhpRepos\Datatype\Collection;
+use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Runner\test;
 
 test(
     title: 'it should push the given item to the collection',
