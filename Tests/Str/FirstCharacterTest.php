@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Str\LastCharacterTest;
+namespace Tests\Str\FirstCharacterTest;
 
 use PhpRepos\Datatype\Str;
 use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;

@@ -3,6 +3,8 @@
 namespace PhpRepos\Datatype\Arr;
 
 use Closure;
+use PhpRepos\Datatype\Collection;
+use PhpRepos\Datatype\Map;
 
 function every(array $array, Closure $check = null): bool
 {
@@ -111,6 +113,12 @@ function last(array $array, Closure $condition = null): mixed
 function map(array $array, Closure $callback): array
 {
     return array_map($callback, array_values($array), array_keys($array));
+}
+
+function max_key_length(array|Collection|Map $array): int
+{
+    $keys = is_array($array) ? array_keys($array) : $array->keys();
+    return empty($array) ? 0 : max(array_map('mb_strlen', $keys));
 }
 
 function reduce(array $array, Closure $callback, mixed $carry = null): mixed

@@ -60,14 +60,64 @@ function between(string $subject, string $start, string $end): string
     return substr($second, 0, $position_end);
 }
 
+function camel_case(string $subject): string
+{
+    $subject = str_replace(['-', '_'], ' ', $subject);
+    $words = preg_split('/[\s]+/', $subject);
+    $camelCase = '';
+    foreach ($words as $word) {
+        $camelCase .= ucfirst($word);
+    }
+    return lcfirst($camelCase);
+}
+
+function concat(string $suffix, ?string ...$subjects): string
+{
+    return implode($suffix, array_filter($subjects));
+}
+
 function first_character(string $subject): string
 {
     return mb_substr($subject, 0, 1);
 }
 
+function first_line(string $subject): string
+{
+    $subject = ltrim($subject, PHP_EOL);
+    $pos = strpos($subject, PHP_EOL);
+
+    if ($pos !== false) {
+        return trim(substr($subject, 0, $pos));
+    }
+
+    return trim($subject);
+}
+
 function last_character(string $subject): string
 {
     return mb_substr($subject, -1);
+}
+
+function kebab_case(string $subject): string
+{
+    // Use a regular expression to insert underscores before uppercase letters
+    $subject = preg_replace('/([a-z])([A-Z])/', '$1_$2', $subject);
+
+    // Replace spaces and underscores with hyphen
+    $subject = preg_replace('/[ _]+/', '-', $subject);
+
+    // Convert to lowercase
+    return strtolower($subject);
+}
+
+function pascal_case(string $subject): string
+{
+    return ucfirst(camel_case($subject));
+}
+
+function prepend_when_exists(?string $subject, string $prefix): string
+{
+    return $subject ? $prefix . $subject : '';
 }
 
 function remove_first_character(string $subject): string
@@ -90,9 +140,27 @@ function replace_first_occurrence(string $subject, string $search, string $repla
     return $subject;
 }
 
+function snake_case(string $subject): string
+{
+    // Use a regular expression to insert underscores before uppercase letters
+    $subject = preg_replace('/([a-z])([A-Z])/', '$1_$2', $subject);
+
+    // Replace spaces and hyphens with underscores
+    $subject = preg_replace('/[ \-]+/', '_', $subject);
+
+    // Convert to lowercase
+    return strtolower($subject);
+}
+
 function starts_with_regex(string $subject, string $pattern): bool
 {
     $pattern = str_ends_with($pattern, '\\') ? $pattern . '\\' : $pattern;
 
     return preg_match("/^$pattern/u", $subject);
+}
+
+function words(string $subject, string $separators = " \t\r\n\f\v"): array
+{
+    $escaped_separators = preg_quote($separators, '/');
+    return preg_split("/[$escaped_separators]+/", $subject, -1, PREG_SPLIT_NO_EMPTY);
 }
