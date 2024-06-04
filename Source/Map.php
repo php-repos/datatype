@@ -16,6 +16,7 @@ use function PhpRepos\Datatype\Arr\has;
 use function PhpRepos\Datatype\Arr\last;
 use function PhpRepos\Datatype\Arr\map;
 use function PhpRepos\Datatype\Arr\reduce;
+use function PhpRepos\Datatype\Arr\skip;
 use function PhpRepos\Datatype\Arr\take;
 
 class Map implements ArrayAccess, IteratorAggregate, Countable
@@ -58,11 +59,18 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
         };
 
         return $this->reduce(function (Map $results, Pair $pair, mixed $index) use ($check) {
-            if (! $check($pair, $index)) {
-                $results->put($pair, $index);
-            }
+            return ! $check($pair, $index) ? $results->put($pair, $index) : $results;
+        }, new static([]));
+    }
 
-            return $results;
+    public function filter(Closure $check = null): static
+    {
+        $check = $check ?? function (Pair $pair) {
+            return (bool) $pair->value;
+        };
+
+        return $this->reduce(function (Map $results, Pair $pair, mixed $index) use ($check) {
+            return $check($pair, $index) ? $results->put($pair, $index) : $results;
         }, new static([]));
     }
 
@@ -160,6 +168,14 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
     public function reduce(Closure $closure, mixed $carry = null): mixed
     {
         return reduce($this->items, $closure, $carry);
+    }
+
+    public function skip(int $offset): static
+    {
+        $map = new static();
+        $map->items = skip($this->items(), $offset);
+
+        return $map;
     }
 
     public function take(Closure $condition): ?Pair

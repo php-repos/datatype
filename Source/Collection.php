@@ -17,6 +17,7 @@ use function PhpRepos\Datatype\Arr\last;
 use function PhpRepos\Datatype\Arr\last_key;
 use function PhpRepos\Datatype\Arr\map;
 use function PhpRepos\Datatype\Arr\reduce;
+use function PhpRepos\Datatype\Arr\skip;
 use function PhpRepos\Datatype\Arr\take;
 
 class Collection implements ArrayAccess, IteratorAggregate, Countable
@@ -168,6 +169,14 @@ class Collection implements ArrayAccess, IteratorAggregate, Countable
     public function reduce(Closure $closure, mixed $carry = null): mixed
     {
         return reduce($this->items, $closure, $carry);
+    }
+
+    public function skip(int $offset): static
+    {
+        $collection = new static();
+        $collection->items = skip($this->items(), $offset);
+
+        return $collection;
     }
 
     public function take(Closure $condition): mixed
