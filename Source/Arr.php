@@ -130,6 +130,11 @@ function reduce(array $array, Closure $callback, mixed $carry = null): mixed
     );
 }
 
+function skip(array $array, int $offset): array
+{
+    return array_slice($array, $offset);
+}
+
 function take(array &$array, Closure $condition): mixed
 {
     if (is_null($key = first_key($array, $condition))) {
