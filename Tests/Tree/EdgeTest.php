@@ -4,7 +4,7 @@ namespace Tests\Tree\EdgeTest;
 
 use PhpRepos\Datatype\Pair;
 use PhpRepos\Datatype\Tree;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

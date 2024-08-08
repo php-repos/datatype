@@ -3,7 +3,7 @@
 namespace Tests\Str\AfterLastOccurrenceTest;
 
 use PhpRepos\Datatype\Str;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

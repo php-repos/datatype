@@ -3,7 +3,7 @@
 namespace Tests\Str\PascalCaseTest;
 
 use function PhpRepos\Datatype\Str\pascal_case;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

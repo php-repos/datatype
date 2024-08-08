@@ -3,8 +3,8 @@
 namespace Tests\Arr\HasTest;
 
 use function PhpRepos\Datatype\Arr\has;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_false;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_false;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(
