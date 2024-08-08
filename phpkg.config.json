@@ -3,14 +3,12 @@
         "PhpRepos\\Datatype": "Source",
         "Tests": "Tests"
     },
-    "entry-points": [],
+    "autoloads": [],
     "excludes": [],
+    "entry-points": [],
     "executables": [],
+    "import-file": "phpkg.imports.php",
     "packages-directory": "Packages",
-    "packages": {
-        "git@github.com:php-repos\/test-runner.git": "v1.1.0"
-    },
-    "aliases": {
-        "test-runner": "git@github.com:php-repos\/test-runner.git"
-    }
+    "packages": [],
+    "aliases": []
 }

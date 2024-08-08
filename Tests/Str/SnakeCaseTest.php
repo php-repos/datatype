@@ -3,7 +3,7 @@
 namespace Tests\Str\SnakeCaseTest;
 
 use function PhpRepos\Datatype\Str\snake_case;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

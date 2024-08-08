@@ -4,7 +4,7 @@ namespace Tests\Text\TextTest;
 
 use PhpRepos\Datatype\Text;
 use Stringable;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

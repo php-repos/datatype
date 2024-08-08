@@ -4,7 +4,7 @@ namespace Tests\Map\KeysTest;
 
 use PhpRepos\Datatype\Map;
 use PhpRepos\Datatype\Pair;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

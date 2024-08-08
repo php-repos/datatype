@@ -4,7 +4,7 @@ namespace Tests\Arr\LastTest;
 
 use function PhpRepos\Datatype\Arr\last;
 use function PhpRepos\Datatype\Str\first_character;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

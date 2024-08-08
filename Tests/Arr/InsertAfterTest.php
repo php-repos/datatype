@@ -3,7 +3,7 @@
 namespace Tests\Arr\InsertAfterTest;
 
 use function PhpRepos\Datatype\Arr\insert_after;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

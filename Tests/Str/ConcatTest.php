@@ -3,7 +3,7 @@
 namespace Tests\Str\ConcatTest;
 
 use function PhpRepos\Datatype\Str\concat;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(

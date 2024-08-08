@@ -3,7 +3,7 @@
 namespace Tests\Arr\LastKeyTest;
 
 use function PhpRepos\Datatype\Arr\last_key;
-use function PhpRepos\TestRunner\Assertions\Boolean\assert_true;
+use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
 
 test(
