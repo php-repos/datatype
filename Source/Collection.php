@@ -43,12 +43,12 @@ class Collection implements ArrayAccess, IteratorAggregate, Countable
         return $this;
     }
 
-    public function every(Closure $check = null): bool
+    public function every(?Closure $check = null): bool
     {
         return every($this->items(), $check);
     }
 
-    public function except(Closure $check = null): static
+    public function except(?Closure $check = null): static
     {
         $check = $check ?? function ($value) {
             return (bool) $value;
@@ -65,7 +65,7 @@ class Collection implements ArrayAccess, IteratorAggregate, Countable
         return new static($results);
     }
 
-    public function filter(Closure $closure = null): static
+    public function filter(?Closure $closure = null): static
     {
         if ($closure) {
             $results = [];
@@ -82,12 +82,12 @@ class Collection implements ArrayAccess, IteratorAggregate, Countable
         return new static(array_filter($this->items));
     }
 
-    public function first_key(Closure $condition = null): string|int|null
+    public function first_key(?Closure $condition = null): string|int|null
     {
         return first_key($this->items(), $condition);
     }
 
-    public function first(Closure $condition = null): mixed
+    public function first(?Closure $condition = null): mixed
     {
         return first($this->items(), $condition);
     }
@@ -119,12 +119,12 @@ class Collection implements ArrayAccess, IteratorAggregate, Countable
         return array_keys($this->items);
     }
 
-    public function last_key(Closure $condition = null): string|int|null
+    public function last_key(?Closure $condition = null): string|int|null
     {
         return last_key($this->items(), $condition);
     }
 
-    public function last(Closure $condition = null): mixed
+    public function last(?Closure $condition = null): mixed
     {
         return last($this->items(), $condition);
     }

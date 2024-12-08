@@ -6,7 +6,7 @@ use Closure;
 use PhpRepos\Datatype\Collection;
 use PhpRepos\Datatype\Map;
 
-function every(array $array, Closure $check = null): bool
+function every(array $array, ?Closure $check = null): bool
 {
     if (is_callable($check)) {
         foreach ($array as $key => $value) {
@@ -21,7 +21,7 @@ function every(array $array, Closure $check = null): bool
     return ! empty(array_filter($array));
 }
 
-function first_key(array $array, Closure $condition = null): string|int|null
+function first_key(array $array, ?Closure $condition = null): string|int|null
 {
     if (is_callable($condition)) {
         foreach ($array as $key => $value) {
@@ -36,7 +36,7 @@ function first_key(array $array, Closure $condition = null): string|int|null
     return array_key_first($array) ?? null;
 }
 
-function first(array $array, Closure $condition = null): mixed
+function first(array $array, ?Closure $condition = null): mixed
 {
     if (is_callable($condition)) {
         foreach ($array as $key => $value) {
@@ -82,7 +82,7 @@ function insert_after(array $array, mixed $key, array $additional): array
     return array_merge(array_slice($array, 0, $pos), $additional, array_slice($array, $pos));
 }
 
-function last_key(array $array, Closure $condition = null): null|int|string
+function last_key(array $array, ?Closure $condition = null): null|int|string
 {
     if (is_callable($condition)) {
         $last = null;
@@ -96,7 +96,7 @@ function last_key(array $array, Closure $condition = null): null|int|string
     return array_key_last($array) ?? null;
 }
 
-function last(array $array, Closure $condition = null): mixed
+function last(array $array, ?Closure $condition = null): mixed
 {
     if (is_callable($condition)) {
         $last = null;
