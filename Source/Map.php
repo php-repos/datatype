@@ -45,14 +45,14 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
         return $this;
     }
 
-    public function every(Closure $check = null): bool
+    public function every(?Closure $check = null): bool
     {
         $check = $check ? fn (Pair $pair) => $check($pair) : fn (Pair $pair) => $pair->value;
 
         return every($this->items, $check);
     }
 
-    public function except(Closure $check = null): static
+    public function except(?Closure $check = null): static
     {
         $check = $check ?? function (Pair $pair) {
             return (bool) $pair->value;
@@ -63,7 +63,7 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
         }, new static([]));
     }
 
-    public function filter(Closure $check = null): static
+    public function filter(?Closure $check = null): static
     {
         $check = $check ?? function (Pair $pair) {
             return (bool) $pair->value;
@@ -74,14 +74,14 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
         }, new static([]));
     }
 
-    public function first_key(Closure $closure = null): null|int|string
+    public function first_key(?Closure $closure = null): null|int|string
     {
         $key = first_key($this->items, $closure);
 
         return $this->items[$key]?->key;
     }
 
-    public function first(Closure $condition = null): ?Pair
+    public function first(?Closure $condition = null): ?Pair
     {
         return first($this->items, $condition);
     }
@@ -108,7 +108,7 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
         return $this->items;
     }
 
-    public function last(Closure $condition = null): ?Pair
+    public function last(?Closure $condition = null): ?Pair
     {
         return last($this->items, $condition);
     }
