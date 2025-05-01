@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Str\FirstLineTest;
-
 use function PhpRepos\Datatype\Str\first_line;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;

@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Str\StartsWithRegexTest;
-
 use function PhpRepos\Datatype\Str\starts_with_regex;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Assertions\assert_false;

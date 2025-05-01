@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Str\BeforeFirstOccurrenceTest;
-
 use PhpRepos\Datatype\Str;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;

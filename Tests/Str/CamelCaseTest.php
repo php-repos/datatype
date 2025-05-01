@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Str\CamelCaseTest;
-
 use function PhpRepos\Datatype\Str\camel_case;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;

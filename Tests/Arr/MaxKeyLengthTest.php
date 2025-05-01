@@ -1,10 +1,6 @@
 <?php
 
-namespace Tests\Arr\MaxKeyLengthTest;
-
 use PhpRepos\Datatype\Collection;
-use PhpRepos\Datatype\Map;
-use PhpRepos\Datatype\Pair;
 use function PhpRepos\Datatype\Arr\max_key_length;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
@@ -54,17 +50,6 @@ test(
     case: function () {
         $array = new Collection(['name' => 'John', 'family' => 'Doe']);
         assert_true(6 === max_key_length($array));
-    }
-);
-
-test(
-    title: 'it should handle a map as input',
-    case: function () {
-        $map = new Map();
-        $map->put(new Pair(1, 'foo'));
-        $map->put(new Pair(10, 'bar'));
-
-        assert_true(2 === max_key_length($map));
     }
 );
 

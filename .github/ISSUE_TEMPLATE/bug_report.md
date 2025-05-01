@@ -19,7 +19,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment:**
  - OS: [e.g. Mac, Linux, Windows]
  - OS Version: [e.g. 12.6, Ubuntu 5.6.0-26-generic, 11 version 22H2]
- - PHP Version [e.g. 8.1.1]
+ - PHP Version [e.g. 8.2.1]
  - phpkg Version [e.g. 1.1]
 
 **Additional context**

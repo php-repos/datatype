@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Str\WordsTest;
-
 use function PhpRepos\Datatype\Str\words;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;

@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Str\BetweenTest;
-
 use function PhpRepos\Datatype\Str\between;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
