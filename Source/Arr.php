@@ -441,6 +441,30 @@ function max_key_length(iterable $array): int
 }
 
 /**
+ * Merges multiple iterables into a single array.
+ *
+ * Combines the elements of the provided iterables, preserving keys for associative arrays and reindexing numeric keys.
+ * Each iterable is converted to an array using to_array before merging.
+ *
+ * @param iterable ...$arrays The iterables to merge (arrays, ArrayAccess, or objects with to_array method).
+ * @return array The merged array.
+ * @example
+ * ```php
+ * $result = merge([1, 2], ['a' => 3, 4], new ArrayIterator([5]));
+ * // Returns [1, 2, 'a' => 3, 4, 5]
+ * ```
+ */
+function merge(iterable ...$arrays): array
+{
+    $result = [];
+    foreach ($arrays as $array) {
+        $result = array_merge($result, to_array($array));
+    }
+
+    return $result;
+}
+
+/**
  * Reduces an iterable to a single value using a callback.
  *
  * @param iterable $array The iterable to reduce.

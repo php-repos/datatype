@@ -9,6 +9,7 @@ use IteratorAggregate;
 use Traversable;
 use function PhpRepos\Datatype\Arr\forget;
 use function PhpRepos\Datatype\Arr\map;
+use function PhpRepos\Datatype\Arr\merge;
 use function PhpRepos\Datatype\Arr\take_first;
 
 /**
@@ -155,6 +156,29 @@ class Collection implements ArrayAccess, IteratorAggregate, Countable
     public function set(mixed $offset, mixed $value): static
     {
         $this->items[$offset] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Merges multiple iterables into the current collection.
+     *
+     * Combines the elements of the provided iterables with the collection's items, preserving keys for associative arrays
+     * and reindexing numeric keys. Each iterable is converted to an array using Arr\to_array before merging.
+     * The collection's items are replaced with the merged result.
+     *
+     * @param iterable ...$arrays The iterables to merge (arrays, ArrayAccess, or objects with to_array method).
+     * @return static Returns the collection instance for method chaining.
+     * @example
+     * ```php
+     * $collection = Collection::make([1, 2]);
+     * $collection->merge(['a' => 3, 4], new ArrayIterator([5]));
+     * // Collection now contains [1, 2, 'a' => 3, 4, 5]
+     * ```
+     */
+    public function merge(iterable ...$arrays): static
+    {
+        $this->items = merge($this, ...$arrays);
 
         return $this;
     }

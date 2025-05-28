@@ -29,7 +29,7 @@ class Text implements Stringable
      *
      * @var string
      */
-    private string $string;
+    protected string $string;
 
     /**
      * Constructs a new Text instance with an optional initial string.

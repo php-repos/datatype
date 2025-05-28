@@ -2,7 +2,7 @@
 
 This document provides a detailed reference for all functions, methods, and classes in the `datatype` package for `phpkg`. For an overview, installation instructions, and usage examples, see the [README.md](README.md).
 
-The `datatype` package, under the `PhpRepos\Datatype` namespace, offers utilities for array and string manipulation, including fluent collections, key-value maps, sets, and string operations with UTF-8 support.
+The `datatype` package, under the `PhpRepos\Datatype` namespace, offers utilities for managing various data structures with a fluent, extensible API and UTF-8 support.
 
 ## Table of Contents
 - [Arr](#arr)
@@ -13,13 +13,7 @@ The `datatype` package, under the `PhpRepos\Datatype` namespace, offers utilitie
 - [Text](#text)
 
 ## Arr
-The `Arr` component provides helper functions for array operations, supporting arrays, iterables, and objects with a `to_array` method.
-
-- **to_array(mixed $input): array**
-  - Converts a mixed input to an array.
-  - **Parameters**: `$input` - Array, iterable, or object with `to_array` method.
-  - **Throws**: `InvalidArgumentException` if input is invalid.
-  - **Example**: `to_array(new ArrayIterator([1, 2, 3])) // [1, 2, 3]`
+The `Arr` component provides helper functions for array and iterable operations, supporting arrays, iterables, and objects with a `to_array` method.
 
 - **assert_equal(iterable $actual, iterable $expected, ?string $message = null): true**
   - Asserts two iterables are equal (same values in order).
@@ -39,7 +33,7 @@ The `Arr` component provides helper functions for array operations, supporting a
   - **Example**: `all([1, 2, 3], fn($v) => $v > 0) // true`
 
 - **any(iterable $array, ?callable $condition = null): bool**
-  - Checks if any element satisfies a condition or if non-empty.
+  - Checks if any element satisfies a condition or is non-empty.
   - **Parameters**: `$array` - Iterable to check; `$condition` - Optional callback (value, key).
   - **Example**: `any([1, 2, 3], fn($v) => $v > 2) // true`
 
@@ -52,6 +46,11 @@ The `Arr` component provides helper functions for array operations, supporting a
   - Checks if a value exists in an iterable.
   - **Parameters**: `$array` - Iterable to check; `$value` - Value to search for.
   - **Example**: `contains([1, 2, 3], 2) // true`
+
+- **filter(iterable $array, ?callable $callback = null): array**
+  - Filters elements based on a callback or truthy values.
+  - **Parameters**: `$array` - Iterable to filter; `$callback` - Optional callback (value, key).
+  - **Example**: `filter([1, 0, 3], fn($v) => $v > 0) // [1, 3]`
 
 - **first_key(iterable $array, ?callable $condition = null): string|int|null**
   - Returns the first key satisfying a condition or the first key.
@@ -72,11 +71,6 @@ The `Arr` component provides helper functions for array operations, supporting a
   - Checks if any element satisfies a condition.
   - **Parameters**: `$array` - Iterable to check; `$callable` - Callback (value, key).
   - **Example**: `has([1, 2, 3], fn($v) => $v > 2) // true`
-
-- **filter(iterable $array, ?callable $callback = null): array**
-  - Filters elements based on a callback or truthy values.
-  - **Parameters**: `$array` - Iterable to filter; `$callback` - Optional callback (value, key).
-  - **Example**: `filter([1, 0, 3], fn($v) => $v > 0) // [1, 3]`
 
 - **insert_after(iterable $array, mixed $key, iterable $additional): array**
   - Inserts elements after a key.
@@ -103,6 +97,11 @@ The `Arr` component provides helper functions for array operations, supporting a
   - **Parameters**: `$array` - Iterable to process.
   - **Example**: `max_key_length(['abc' => 1, 'de' => 2]) // 3`
 
+- **merge(iterable ...$arrays): array**
+  - Merges multiple iterables into a single array.
+  - **Parameters**: `$arrays` - Iterables to merge (arrays, ArrayAccess, or objects with to_array method).
+  - **Example**: `merge([1, 2], ['a' => 3], new ArrayIterator([4])) // [1, 2, 'a' => 3, 4]`
+
 - **reduce(iterable $array, callable $callback, mixed $carry = null): mixed**
   - Reduces an iterable to a single value.
   - **Parameters**: `$array` - Iterable to reduce; `$callback` - Callback (carry, value, key); `$carry` - Initial value.
@@ -113,6 +112,12 @@ The `Arr` component provides helper functions for array operations, supporting a
   - **Parameters**: `$array` - Array to process (modified); `$condition` - Callback (value, key).
   - **Example**: `$array = ['a' => 1, 'b' => 2]; take_first($array, fn($v) => $v > 1) // 2, $array = ['a' => 1]`
 
+- **to_array(mixed $input): array**
+  - Converts a mixed input to an array.
+  - **Parameters**: `$input` - Array, iterable, or object with to_array method.
+  - **Throws**: `InvalidArgumentException` if input is invalid.
+  - **Example**: `to_array(new ArrayIterator([1, 2, 3])) // [1, 2, 3]`
+
 ## Collection
 A fluent array wrapper implementing `ArrayAccess`, `IteratorAggregate`, and `Countable`.
 
@@ -121,52 +126,33 @@ A fluent array wrapper implementing `ArrayAccess`, `IteratorAggregate`, and `Cou
   - **Parameters**: `$init` - Initial array.
   - **Example**: `new Collection([1, 2, 3])`
 
-- **make(array $init): static**
-  - Creates a new instance.
-  - **Parameters**: `$init` - Initial array.
-  - **Example**: `Collection::make([1, 2, 3])`
+- **count(): int**
+  - Counts items.
+  - **Example**: `$collection->count() // 3`
 
 - **forget(callable $condition): static**
   - Removes elements satisfying a condition.
   - **Parameters**: `$condition` - Callback (value, key).
   - **Example**: `$collection->forget(fn($v) => $v > 1) // [1]`
 
+- **getIterator(): Traversable**
+  - Returns an iterator.
+  - **Example**: `foreach ($collection->getIterator() as $v) { /* ... */ }`
+
+- **make(array $init): static**
+  - Creates a new instance.
+  - **Parameters**: `$init` - Initial array.
+  - **Example**: `Collection::make([1, 2, 3])`
+
 - **map(callable $callback): static**
   - Maps elements using a callback.
   - **Parameters**: `$callback` - Callback (value, key).
   - **Example**: `$collection->map(fn($v) => $v * 2) // [2, 4, 6]`
 
-- **put(mixed $value, mixed $key = null): static**
-  - Adds a value, optionally with a key.
-  - **Parameters**: `$value` - Value to add; `$key` - Optional key.
-  - **Example**: `$collection->put(1) // [1]; $collection->put(2, 'a') // ['a' => 2]`
-
-- **push(mixed ...$values): static**
-  - Appends values.
-  - **Parameters**: `$values` - Values to append.
-  - **Example**: `$collection->push(1, 2) // [1, 2]`
-
-- **set(mixed $offset, mixed $value): static**
-  - Sets a value at an offset, overwriting existing.
-  - **Parameters**: `$offset` - Key; `$value` - Value.
-  - **Example**: `$collection->set('a', 1) // ['a' => 1]`
-
-- **take_first(callable $condition): mixed**
-  - Removes and returns the first element satisfying a condition.
-  - **Parameters**: `$condition` - Callback (value, key).
-  - **Example**: `$collection->take_first(fn($v) => $v > 1) // 2`
-
-- **to_array(): array**
-  - Returns the underlying array.
-  - **Example**: `$collection->to_array() // [1, 2, 3]`
-
-- **count(): int**
-  - Counts items.
-  - **Example**: `$collection->count() // 3`
-
-- **getIterator(): Traversable**
-  - Returns an iterator.
-  - **Example**: `foreach ($collection->getIterator() as $v) { /* ... */ }`
+- **merge(iterable ...$arrays): static**
+  - Merges multiple iterables into the current collection.
+  - **Parameters**: `$arrays` - Iterables to merge (arrays, ArrayAccess, or objects with to_array method).
+  - **Example**: `$collection = Collection::make([1, 2]); $collection->merge(['a' => 3, 4], new ArrayIterator([5])); // [1, 2, 'a' => 3, 4, 5]`
 
 - **offsetExists(mixed $offset): bool**
   - Checks if an offset exists.
@@ -188,6 +174,30 @@ A fluent array wrapper implementing `ArrayAccess`, `IteratorAggregate`, and `Cou
   - **Parameters**: `$offset` - Key to unset.
   - **Example**: `$collection->offsetUnset('a')`
 
+- **push(mixed ...$values): static**
+  - Appends values.
+  - **Parameters**: `$values` - Values to append.
+  - **Example**: `$collection->push(1, 2) // [1, 2]`
+
+- **put(mixed $value, mixed $key = null): static**
+  - Adds a value, optionally with a key.
+  - **Parameters**: `$value` - Value to add; `$key` - Optional key.
+  - **Example**: `$collection->put(1) // [1]; $collection->put(2, 'a') // ['a' => 2]`
+
+- **set(mixed $offset, mixed $value): static**
+  - Sets a value at an offset, overwriting existing.
+  - **Parameters**: `$offset` - Key; `$value` - Value.
+  - **Example**: `$collection->set('a', 1) // ['a' => 1]`
+
+- **take_first(callable $condition): mixed**
+  - Removes and returns the first element satisfying a condition.
+  - **Parameters**: `$condition` - Callback (value, key).
+  - **Example**: `$collection->take_first(fn($v) => $v > 1) // 2`
+
+- **to_array(): array**
+  - Returns the underlying array.
+  - **Example**: `$collection->to_array() // [1, 2, 3]`
+
 ## Map
 A key-value store with unique keys, implementing `ArrayAccess`, `IteratorAggregate`, and `Countable`.
 
@@ -196,34 +206,28 @@ A key-value store with unique keys, implementing `ArrayAccess`, `IteratorAggrega
   - **Parameters**: `$init` - Array of pairs (`['key' => $key, 'value' => $value]` or `[$key, $value]`).
   - **Example**: `new Map([['key' => 'a', 'value' => 1]])`
 
-- **from(array $items): static**
-  - Creates a new instance from pairs.
-  - **Parameters**: `$items` - Array of pairs with `key` and `value`.
-  - **Example**: `Map::from([['key' => 'a', 'value' => 1]])`
+- **are_equal(mixed $key1, mixed $key2): bool** (protected)
+  - Compares keys using loose equality (extensible).
+  - **Parameters**: `$key1`, `$key2` - Keys to compare.
+  - **Example**: Extend class to override for strict equality.
 
-- **to_array(): array**
-  - Returns the array of key-value pairs.
-  - **Example**: `$map->to_array() // [['key' => 'a', 'value' => 1]]`
-
-- **put(mixed $key, mixed $value): static**
-  - Adds a pair if the key doesn’t exist.
-  - **Parameters**: `$key` - Key; `$value` - Value.
-  - **Example**: `$map->put('a', 1) // [['key' => 'a', 'value' => 1]]`
+- **count(): int**
+  - Counts pairs.
+  - **Example**: `$map->count() // 2`
 
 - **forget(callable $condition): static**
   - Removes pairs satisfying a condition.
   - **Parameters**: `$condition` - Callback (pair array).
   - **Example**: `$map->forget(fn($pair) => $pair['value'] > 1)`
 
-- **set(mixed $key, mixed $value): static**
-  - Sets or updates a pair.
-  - **Parameters**: `$key` - Key; `$value` - Value.
-  - **Example**: `$map->set('a', 2) // Updates or adds 'a' => 2`
+- **from(array $items): static**
+  - Creates a new instance from pairs.
+  - **Parameters**: `$items` - Array of pairs with `key` and `value`.
+  - **Example**: `Map::from([['key' => 'a', 'value' => 1]])`
 
-- **swap(mixed $key, mixed $value): static**
-  - Updates a value if the key exists.
-  - **Parameters**: `$key` - Key; `$value` - New value.
-  - **Example**: `$map->swap('a', 2) // Updates 'a' to 2 if exists`
+- **getIterator(): Traversable**
+  - Returns an iterator.
+  - **Example**: `foreach ($map->getIterator() as $pair) { /* ... */ }`
 
 - **map(callable $callback): static**
   - Maps values using a callback.
@@ -251,18 +255,24 @@ A key-value store with unique keys, implementing `ArrayAccess`, `IteratorAggrega
   - **Parameters**: `$offset` - Key to remove.
   - **Example**: `$map->offsetUnset('a')`
 
-- **getIterator(): Traversable**
-  - Returns an iterator.
-  - **Example**: `foreach ($map->getIterator() as $pair) { /* ... */ }`
+- **put(mixed $key, mixed $value): static**
+  - Adds a pair if the key doesn’t exist.
+  - **Parameters**: `$key` - Key; `$value` - Value.
+  - **Example**: `$map->put('a', 1) // [['key' => 'a', 'value' => 1]]`
 
-- **count(): int**
-  - Counts pairs.
-  - **Example**: `$map->count() // 2`
+- **set(mixed $key, mixed $value): static**
+  - Sets or updates a pair.
+  - **Parameters**: `$key` - Key; `$value` - Value.
+  - **Example**: `$map->set('a', 2) // Updates or adds 'a' => 2`
 
-- **are_equal(mixed $key1, mixed $key2): bool** (protected)
-  - Compares keys using loose equality (extensible).
-  - **Parameters**: `$key1`, `$key2` - Keys to compare.
-  - **Example**: Extend class to override for strict equality.
+- **swap(mixed $key, mixed $value): static**
+  - Updates a value if the key exists.
+  - **Parameters**: `$key` - Key; `$value` - New value.
+  - **Example**: `$map->swap('a', 2) // Updates 'a' to 2 if exists`
+
+- **to_array(): array**
+  - Returns the array of key-value pairs.
+  - **Example**: `$map->to_array() // [['key' => 'a', 'value' => 1]]`
 
 ## Set
 A collection of unique values, implementing `ArrayAccess`, `IteratorAggregate`, and `Countable`.
@@ -272,47 +282,51 @@ A collection of unique values, implementing `ArrayAccess`, `IteratorAggregate`, 
   - **Parameters**: `$init` - Initial array.
   - **Example**: `new Set([1, 2, 2]) // [1, 2]`
 
-- **from(?array $init): static**
-  - Creates a new instance.
-  - **Parameters**: `$init` - Initial array.
-  - **Example**: `Set::from([1, 2, 2])`
-
-- **range(float|int|string $start, float|int|string $end, int|float $step = 1): static**
-  - Creates a set with a range of values.
-  - **Parameters**: `$start`, `$end` - Range bounds; `$step` - Increment.
-  - **Example**: `Set::range(1, 3) // [1, 2, 3]`
-
-- **alphabet(): static**
-  - Creates a set of lowercase alphabet letters.
-  - **Example**: `Set::alphabet() // ['a', 'b', ..., 'z']`
-
-- **to_array(): array**
-  - Returns the array of unique values.
-  - **Example**: `$set->to_array() // [1, 2, 3]`
-
 - **add(mixed ...$values): static**
   - Adds values if not present.
   - **Parameters**: `$values` - Values to add.
   - **Example**: `$set->add(1, 2, 2) // [1, 2]`
 
-- **remove(mixed ...$values): static**
-  - Removes values.
-  - **Parameters**: `$values` - Values to remove.
-  - **Example**: `$set->remove(1) // [2, 3]`
+- **alphabet(): static**
+  - Creates a set of lowercase alphabet letters.
+  - **Example**: `Set::alphabet() // ['a', 'b', ..., 'z']`
+
+- **are_equal(mixed $value1, mixed $value2): bool** (protected)
+  - Compares values using loose equality (extensible).
+  - **Parameters**: `$value1`, `$value2` - Values to compare.
+  - **Example**: Extend class to override for strict equality.
+
+- **clear(): static**
+  - Clears all items.
+  - **Example**: `$set->clear() // []`
+
+- **count(): int**
+  - Counts items.
+  - **Example**: `$set->count() // 3`
 
 - **forget(callable $condition): static**
   - Removes items satisfying a condition.
   - **Parameters**: `$condition` - Callback (item).
   - **Example**: `$set->forget(fn($v) => $v > 1)`
 
-- **clear(): static**
-  - Clears all items.
-  - **Example**: `$set->clear() // []`
+- **from(?array $init): static**
+  - Creates a new instance.
+  - **Parameters**: `$init` - Initial array.
+  - **Example**: `Set::from([1, 2, 2])`
+
+- **getIterator(): Traversable**
+  - Returns an iterator.
+  - **Example**: `foreach ($set->getIterator() as $v) { /* ... */ }`
 
 - **map(callable $callback): static**
   - Maps items using a callback.
   - **Parameters**: `$callback` - Callback (item).
   - **Example**: `$set->map(fn($v) => $v * 2)`
+
+- **merge(iterable ...$arrays): static**
+  - Merges multiple iterables into the current set, ensuring unique values using loose equality (override with are_equal).
+  - **Parameters**: `$arrays` - Iterables to merge (arrays, ArrayAccess, or objects with to_array method).
+  - **Example**: `$set = Set::from([1, 2]); $set->merge([2, 3], new ArrayIterator([3, 4])); // [1, 2, 3, 4]`
 
 - **offsetExists(mixed $offset): bool**
   - Checks if an offset exists.
@@ -334,33 +348,22 @@ A collection of unique values, implementing `ArrayAccess`, `IteratorAggregate`, 
   - **Parameters**: `$offset` - Offset to unset.
   - **Example**: `$set->offsetUnset(0)`
 
-- **getIterator(): Traversable**
-  - Returns an iterator.
-  - **Example**: `foreach ($set->getIterator() as $v) { /* ... */ }`
+- **range(float|int|string $start, float|int|string $end, int|float $step = 1): static**
+  - Creates a set with a range of values.
+  - **Parameters**: `$start`, `$end` - Range bounds; `$step` - Increment.
+  - **Example**: `Set::range(1, 3) // [1, 2, 3]`
 
-- **count(): int**
-  - Counts items.
-  - **Example**: `$set->count() // 3`
+- **remove(mixed ...$values): static**
+  - Removes values.
+  - **Parameters**: `$values` - Values to remove.
+  - **Example**: `$set->remove(1) // [2, 3]`
 
-- **are_equal(mixed $value1, mixed $value2): bool** (protected)
-  - Compares values using loose equality (extensible).
-  - **Parameters**: `$value1`, `$value2` - Values to compare.
-  - **Example**: Extend class to override for strict equality.
+- **to_array(): array**
+  - Returns the array of unique values.
+  - **Example**: `$set->to_array() // [1, 2, 3]`
 
 ## Str
 String manipulation functions with UTF-8 support, handling `string` and `Stringable`.
-
-- **assert_equal(string|Stringable $actual, string|Stringable $expected, ?string $message = null): true**
-  - Asserts strings are equal after conversion.
-  - **Parameters**: `$actual`, `$expected` - Strings to compare; `$message` - Optional error message.
-  - **Throws**: `AssertionError` if not equal.
-  - **Example**: `assert_equal('hello', 'hello') // true`
-
-- **assert_same(string|Stringable $actual, string|Stringable $expected, ?string $message = null): true**
-  - Asserts strings are identical.
-  - **Parameters**: `$actual`, `$expected` - Strings to compare; `$message` - Optional error message.
-  - **Throws**: `AssertionError` if not identical.
-  - **Example**: `$str = 'hello'; assert_same($str, $str) // true`
 
 - **after(string $subject, int $position): string**
   - Returns substring from position to end.
@@ -376,6 +379,18 @@ String manipulation functions with UTF-8 support, handling `string` and `Stringa
   - Returns substring after last needle occurrence.
   - **Parameters**: `$subject`, `$needle` - Strings.
   - **Example**: `after_last_occurrence('hello world hello', ' ') // 'hello'`
+
+- **assert_equal(string|Stringable $actual, string|Stringable $expected, ?string $message = null): true**
+  - Asserts strings are equal after conversion.
+  - **Parameters**: `$actual`, `$expected` - Strings to compare; `$message` - Optional error message.
+  - **Throws**: `AssertionError` if not equal.
+  - **Example**: `assert_equal('hello', 'hello') // true`
+
+- **assert_same(string|Stringable $actual, string|Stringable $expected, ?string $message = null): true**
+  - Asserts strings are identical.
+  - **Parameters**: `$actual`, `$expected` - Strings to compare; `$message` - Optional error message.
+  - **Throws**: `AssertionError` if not identical.
+  - **Example**: `$str = 'hello'; assert_same($str, $str) // true`
 
 - **before(string $subject, int $position): string**
   - Returns substring from start to position.
@@ -417,15 +432,15 @@ String manipulation functions with UTF-8 support, handling `string` and `Stringa
   - **Parameters**: `$subject` - String.
   - **Example**: `first_line("hello\nworld") // 'hello'`
 
-- **last_character(string $subject): string**
-  - Returns last character.
-  - **Parameters**: `$subject` - String.
-  - **Example**: `last_character('hello') // 'o'`
-
 - **kebab_case(string $subject): string**
   - Converts to kebab-case.
   - **Parameters**: `$subject` - String.
   - **Example**: `kebab_case('helloWorld') // 'hello-world'`
+
+- **last_character(string $subject): string**
+  - Returns last character.
+  - **Parameters**: `$subject` - String.
+  - **Example**: `last_character('hello') // 'o'`
 
 - **pascal_case(string $subject): string**
   - Converts to PascalCase.
@@ -475,50 +490,41 @@ A fluent string wrapper implementing `Stringable`.
   - **Parameters**: `$init` - String or null.
   - **Example**: `new Text('hello')`
 
-- **from(?string $init): static**
-  - Creates a new instance.
-  - **Parameters**: `$init` - String or null.
-  - **Example**: `Text::from('hello')`
-
-- **string(): string**
-  - Returns the underlying string.
-  - **Example**: `$text->string() // 'hello'`
-
-- **set(string $string): static**
-  - Sets the string.
-  - **Parameters**: `$string` - New string.
-  - **Example**: `$text->set('world')`
+- **__toString(): string**
+  - Returns string representation.
+  - **Example**: `echo $text; // 'hello'`
 
 - **append(string ...$subjects): static**
   - Appends strings without separator.
   - **Parameters**: `$subjects` - Strings to append.
   - **Example**: `$text->append(' world') // 'hello world'`
 
+- **camel_case(): static**
+  - Converts to camelCase.
+  - **Example**: `$text->camel_case() // 'helloWorld'`
+
 - **concat(string $suffix, ...$subjects): static**
   - Concatenates with a separator.
   - **Parameters**: `$suffix` - Separator; `$subjects` - Strings to join.
   - **Example**: `$text->concat('-', 'world') // 'hello-world'`
+
+- **from(?string $init): static**
+  - Creates a new instance.
+  - **Parameters**: `$init` - String or null.
+  - **Example**: `Text::from('hello')`
+
+- **kebab_case(): static**
+  - Converts to kebab-case.
+  - **Example**: `$text->kebab_case() // 'hello-world'`
 
 - **map(callable $callback): static**
   - Applies a callback to the string.
   - **Parameters**: `$callback` - Callback (Text object).
   - **Example**: `$text->map(fn($str) => strtoupper($str)) // 'HELLO'`
 
-- **camel_case(): static**
-  - Converts to camelCase.
-  - **Example**: `$text->camel_case() // 'helloWorld'`
-
-- **kebab_case(): static**
-  - Converts to kebab-case.
-  - **Example**: `$text->kebab_case() // 'hello-world'`
-
 - **pascal_case(): static**
   - Converts to PascalCase.
   - **Example**: `$text->pascal_case() // 'HelloWorld'`
-
-- **snake_case(): static**
-  - Converts to snake_case.
-  - **Example**: `$text->snake_case() // 'hello_world'`
 
 - **remove_first_character(): static**
   - Removes first character.
@@ -528,9 +534,18 @@ A fluent string wrapper implementing `Stringable`.
   - Removes last character.
   - **Example**: `$text->remove_last_character() // 'hell'`
 
-- **__toString(): string**
-  - Returns string representation.
-  - **Example**: `echo $text; // 'hello'`
+- **set(string $string): static**
+  - Sets the string.
+  - **Parameters**: `$string` - New string.
+  - **Example**: `$text->set('world')`
+
+- **snake_case(): static**
+  - Converts to snake_case.
+  - **Example**: `$text->snake_case() // 'hello_world'`
+
+- **string(): string**
+  - Returns the underlying string.
+  - **Example**: `$text->string() // 'hello'`
 
 ## Extensibility
 Override `Map::are_equal` or `Set::are_equal` for custom comparison logic:

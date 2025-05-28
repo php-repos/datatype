@@ -50,6 +50,8 @@ test(
 
         $set->add(4, 5);
         assert_equal($set, [1, 2, 3, 4, 5]);
+
+        assert_equal(Set::from([])->add(1, 2, 3, 4, 2, 3, 5), [1, 2, 3, 4, 5]);
     }
 );
 
@@ -95,5 +97,16 @@ test(
     case: function () {
         $set = Set::range(1, 10);
         assert_equal($set->clear(), []);
+    }
+);
+
+test(
+    title: 'it should merge given iterables',
+    case: function () {
+        $set1 = Set::from([1, 2]);
+        $set2 = Set::from([3, 4]);
+        $array = [2, 3, 5];
+
+        assert_equal($set1->merge($set2, $array), [1, 2, 3, 4, 5]);
     }
 );

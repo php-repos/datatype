@@ -11,6 +11,7 @@ use function PhpRepos\Datatype\Arr\first_key;
 use function PhpRepos\Datatype\Arr\forget;
 use function PhpRepos\Datatype\Arr\has;
 use function PhpRepos\Datatype\Arr\map;
+use function PhpRepos\Datatype\Arr\merge;
 
 /**
  * A set class that provides a fluent interface for managing a unique collection of values.
@@ -209,6 +210,29 @@ class Set implements ArrayAccess, IteratorAggregate, Countable
     public function map(callable $callback): static
     {
         $this->items = map($this, fn (mixed $item) => $callback($item));
+
+        return $this;
+    }
+
+    /**
+     * Merges multiple iterables into the current set, ensuring unique values.
+     *
+     * Combines the elements of the provided iterables with the set's items, preserving uniqueness based on loose equality
+     * as defined in are_equal. Each iterable is converted to an array using Arr\to_array, merged using Arr\merge, and
+     * added to the set. Override are_equal to customize comparison logic.
+     *
+     * @param iterable ...$arrays The iterables to merge (arrays, ArrayAccess, or objects with to_array method).
+     * @return static Returns the set instance for method chaining.
+     * @example
+     * ```php
+     * $set = Set::from([1, 2]);
+     * $set->merge([2, 3], new ArrayIterator([3, 4]));
+     * // Set now contains [1, 2, 3, 4]
+     * ```
+     */
+    public function merge(iterable ...$arrays): static
+    {
+        $this->add(...merge(...$arrays));
 
         return $this;
     }

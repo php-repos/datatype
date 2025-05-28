@@ -95,3 +95,14 @@ test(
         assert_true($result === 'bar');
     }
 );
+
+test(
+    title: 'it should merge given iterables',
+    case: function () {
+        $collection1 = Collection::make([1, 2]);
+        $collection2 = Collection::make([3, 4]);
+        $array = [2, 3, 5];
+
+        assert_equal($collection1->merge($collection2, $array), [1, 2, 3, 4, 2, 3, 5]);
+    }
+);
