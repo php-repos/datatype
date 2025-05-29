@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Arr\MapTest;
-
 use function PhpRepos\Datatype\Arr\map;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;

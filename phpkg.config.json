@@ -1,7 +1,6 @@
 {
     "map": {
-        "PhpRepos\\Datatype": "Source",
-        "Tests": "Tests"
+        "PhpRepos\\Datatype": "Source"
     },
     "autoloads": [],
     "excludes": [],

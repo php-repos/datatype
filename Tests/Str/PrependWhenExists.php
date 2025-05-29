@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Str\PrependWhenExistsTest;
-
 use function PhpRepos\Datatype\Str\prepend_when_exists;
 use function PhpRepos\TestRunner\Assertions\assert_true;
 use function PhpRepos\TestRunner\Runner\test;
