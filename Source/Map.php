@@ -85,6 +85,25 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
     }
 
     /**
+     * Creates a new Map instance from an associative array.
+     *
+     * Keys and values from the associative array are converted to the Map format
+     * with each entry being an array with 'key' and 'value' fields.
+     *
+     * @param array $items The associative array to convert.
+     * @return static A new Map instance.
+     * @example
+     * ```php
+     * $map = Map::from_associative(['a' => 1, 'b' => 2]);
+     * // Creates a map with [['key' => 'a', 'value' => 1], ['key' => 'b', 'value' => 2]]
+     * ```
+     */
+    public static function from_associative(array $items): static
+    {
+        return static::from(map($items, fn ($value, $key) => ['key' => $key, 'value' => $value]));
+    }
+
+    /**
      * Returns the map's items as an array of key-value pairs.
      *
      * @return array The array of key-value pairs, where each pair is an array with 'key' and 'value' fields.
@@ -97,6 +116,23 @@ class Map implements ArrayAccess, IteratorAggregate, Countable
     public function to_array(): array
     {
         return array_values($this->items);
+    }
+
+    /**
+     * Converts the map to a native associative array.
+     *
+     * The keys become the keys of the resulting array and the values become the corresponding values.
+     *
+     * @return array An associative array with keys and values from the map.
+     * @example
+     * ```php
+     * $map = new Map([['key' => 'a', 'value' => 1], ['key' => 'b', 'value' => 2]]);
+     * $assoc = $map->to_associative_array(); // Returns ['a' => 1, 'b' => 2]
+     * ```
+     */
+    public function to_associative_array(): array
+    {
+        return array_column($this->items, 'value', 'key');
     }
 
     /**
