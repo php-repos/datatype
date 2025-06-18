@@ -21,6 +21,23 @@ test(
 );
 
 test(
+    title: 'it should construct a map using associative array',
+    case: function () {
+        assert_equal(Map::from_associative(['foo', 'bar']), [['key' => 0, 'value' => 'foo'], ['key' => 1, 'value' => 'bar']]);
+        assert_equal(Map::from_associative([1 => 'foo', 2 => 'bar']), [['key' => 1, 'value' => 'foo'], ['key' => 2, 'value' => 'bar']]);
+        assert_equal(Map::from_associative(['foo' => 1, 'bar' => 2]), [['key' => 'foo', 'value' => 1], ['key' => 'bar', 'value' => 2]]);
+    }
+);
+
+test(
+    title: 'it should return an associative array of the map, if possible',
+    case: function () {
+        assert_equal(Map::from([['key' => 'name', 'value' => 'john'], ['key' => 'family', 'value' => 'doe']])->to_associative_array(), ['name' => 'john', 'family' => 'doe']);
+        assert_equal(Map::from_associative(['foo', 'bar'])->to_associative_array(), ['foo', 'bar']);
+    }
+);
+
+test(
     title: 'it should put new items in map',
     case: function () {
         $map = new Map();
